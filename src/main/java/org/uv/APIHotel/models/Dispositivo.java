@@ -6,12 +6,15 @@ package org.uv.APIHotel.models;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,12 +26,12 @@ import javax.persistence.Table;
 @Table(name = "dispositivos")
 public class Dispositivo {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id_dispositivo")
-    private String id_dispositivo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ip_dispositivo")
+    private String ip_dispositivo;
     
-    @Column(name = "id_tipo_dis")
-    private int id_tipo_dis;
+    @Column(name = "tipo_dis")
+    private String tipo_dis;
     
     @Column(name = "hora")
     private Time hora;
@@ -42,23 +45,16 @@ public class Dispositivo {
     @Column(name = "ultimavezactivo")
     private Time  ultimavezactivo;
     
-    @OneToOne(mappedBy="dispositivo")
-
+    @ManyToOne
+    @JoinColumn(name="habitacion_dispositivo", nullable=false)
+    private Habitaciones habitacion;
+    
     public String getId_dispositivo() {
-        return id_dispositivo;
+        return ip_dispositivo;
     }
 
-    public void setId_dispositivo(String id_dispositivo) {
-        this.id_dispositivo = id_dispositivo;
-    }
-
-    @Id
-    public int getId_tipo_dis() {
-        return id_tipo_dis;
-    }
-
-    public void setId_tipo_dis(int id_tipo_dis) {
-        this.id_tipo_dis = id_tipo_dis;
+    public void setIp_dispositivo(String ip_dispositivo) {
+        this.ip_dispositivo = ip_dispositivo;
     }
 
     public Time getHora() {
@@ -93,5 +89,20 @@ public class Dispositivo {
         this.ultimavezactivo = ultimavezactivo;
     }
 
-        
+    public String getTipo_dis() {
+        return tipo_dis;
+    }
+
+    public void setTipo_dis(String tipo_dis) {
+        this.tipo_dis = tipo_dis;
+    }
+
+    public Habitaciones getHabitacion() {
+        return habitacion;
+    }
+
+    public void setHabitacion(Habitaciones habitacion) {
+        this.habitacion = habitacion;
+    }
+    
 }

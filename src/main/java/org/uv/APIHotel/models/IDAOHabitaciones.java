@@ -4,10 +4,17 @@
  */
 package org.uv.APIHotel.models;
 
+import java.util.List;
+
 /**
  *
  * @author wbpat
  */
-public interface IIDAOHabitaciones {
-    
+public interface IDAOHabitaciones <T, ID> {
+    public T createHab(T h);
+    public boolean deleteHab(ID id);
+    public T updateHab(T h, ID id);
+
+    public List<T> findAllHab();
+    public T findByIdHab(ID id);
 }
